@@ -1,0 +1,100 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+    #form-details
+      %h3 Bill Payment Rule Details
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        - can = can? :edit, @bm_rule
+        %a.btn{:href => "#{!(can) ? '#' : '/obdx_bm_rules/' + @bm_rule.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'approve', :@record => @bm_rule
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
+        - if !@bm_rule.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@bm_rule)}", :controller => :bm_rules, :action => :audit_logs, :version_id => audit_count(@bm_rule), :id => @bm_rule.id
+          %tr
+            %td.label Form Errors
+            %td.value
+              = ' '
+            %td#msg-error
+              = error_message_for(@bm_rule, :base, :prepend_text => "")
+          %tr
+            %td.label App ID
+            %td.value
+              = @bm_rule.app_id
+            %td#msg-error
+              = error_message_for(@bm_rule, :app_id, :prepend_text => "")
+          %tr
+            %td.label Aggregator Pool Account
+            %td.value
+              = @bm_rule.aggregate_cod_acct_no
+            %td#msg-error
+              = error_message_for(@bm_rule, :cod_acct_no, :prepend_text => "")
+          %tr
+            %td.label Customer ID
+            %td.value
+              = @bm_rule.customer_id
+            %td#msg-error
+              = error_message_for(@bm_rule, :customer_id, :prepend_text => "")
+          %tr
+            %td.label Beneficiary Account No
+            %td.value
+              = @bm_rule.bene_account_no
+            %td#msg-error
+              = error_message_for(@bm_rule, :bene_acct_no, :prepend_text => "")
+          %tr
+            %td.label Beneficiary Account IFSC
+            %td.value
+              = @bm_rule.bene_account_ifsc
+            %td#msg-error
+              = error_message_for(@bm_rule, :bene_account_ifsc, :prepend_text => "")
+          %tr
+            %td.label NEFT Sender IFSC
+            %td.value
+              = @bm_rule.neft_sender_ifsc
+            %td#msg-error
+              = error_message_for(@bm_rule, :neft_sender_ifsc, :prepend_text => "")
+          %tr
+            %td.label Source ID
+            %td.value
+              = @bm_rule.source_id
+            %td#msg-error
+              = error_message_for(@bm_rule, :source_id, :prepend_text => "")
+          %tr
+            %td.label Trace ID Prefix
+            %td.value
+              = @bm_rule.traceid_prefix
+            %td#msg-error
+              = error_message_for(@bm_rule, :traceid_prefix, :prepend_text => "")
+          %tr
+            %td.label Payment Mode
+            %td.value
+              = @bm_rule.payment_mode
+            %td#msg-error
+              = error_message_for(@bm_rule, :payment_mode, :prepend_text => "")
+          %tr
+            %td.label Receivable Customer Id
+            %td.value
+              = @bm_rule.receivable_customer_id
+            %td#msg-error
+              = error_message_for(@bm_rule, :receivable_customer_id, :prepend_text => "")
+          %tr
+            %td.label Receivable Account
+            %td.value
+              = @bm_rule.receivables_account
+            %td#msg-error
+              = error_message_for(@bm_rule, :receivable_account, :prepend_text => "")    
+          %tr
+            %td.label Updated By
+            %td.value
+              = @bm_rule.updated_user.try(:username)
+            %td#msg-error
+              = error_message_for(@bm_rule, :updated_by, :prepend_text => "")
+          %tr
+            %td.label Updated At
+            %td.value
+              = @bm_rule.updated_at
+            %td#msg-error
+              = error_message_for(@bm_rule, :updated_at, :prepend_text => "")
+      = link_to 'Back to Dashboard', root_path              

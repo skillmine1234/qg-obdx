@@ -1,0 +1,29 @@
+= simple_form_for @bm_app, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "bm_app_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@bm_app, :base, :prepend_text => "")
+  .form-main
+    = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version
+    .control-group
+      = f.label :app_id, "*App ID", :class => 'control-label'
+      = f.text_field :app_id, :maxlength => 20
+      #msg-error
+        = error_message_for(@bm_app, :app_id, :prepend_text => "")
+    .control-group
+      = f.label :channel_id, "*Channel ID", :class => 'control-label'
+      = f.text_field :channel_id, :maxlength => 20
+      #msg-error
+        = error_message_for(@bm_app, :channel_id, :prepend_text => "")
+    .control-group
+      = f.label :needs_otp, "*Needs OTP?", :class => 'control-label'
+      = f.check_box :needs_otp, {},"Y","N"
+      #msg-error
+        = error_message_for(@bm_app, :needs_otp, :prepend_text => "")
+
+  .form-actions
+    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_bm_app', :value => label_name + ' BM App'
+    = link_to :Cancel,'/obdx_bm_apps', :name => 'cancel', :class=>"cancel btn"

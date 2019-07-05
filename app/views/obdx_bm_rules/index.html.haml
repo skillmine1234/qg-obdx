@@ -1,0 +1,56 @@
+%br
+= link_to 'New BM Rule', new_obdx_bm_rule_path
+%br
+%br
+%h1 Bill Payment Rules
+%br
+= "Total Count: #{@bm_rules_count}"
+%br
+= will_paginate @bm_rules
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      App ID    
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Aggregator Pool Account
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Customer ID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Beneficiary Account No
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Beneficiary Account IFSC
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      NEFT Sender IFSC
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Payment Mode  
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Receivable Customer Id
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Receivable Account    
+  .tbody
+    - @bm_rules.each do |bm_rule|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', bm_rule
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_obdx_bm_rule_path(bm_rule)
+        %td{:style=>'text-align:left;'}
+          = bm_rule.app_id
+        %td{:style=>'text-align:left;'}
+          = bm_rule.aggregate_cod_acct_no
+        %td{:style=>'text-align:left;'}
+          = bm_rule.customer_id
+        %td{:style=>'text-align:left;'}
+          = bm_rule.bene_account_no
+        %td{:style=>'text-align:left;'}
+          = bm_rule.bene_account_ifsc
+        %td{:style=>'text-align:left;'}
+          = bm_rule.neft_sender_ifsc
+        %td{:style=>'text-align:left;'}
+          = bm_rule.payment_mode     
+        %td{:style=>'text-align:left;'}
+          = bm_rule.receivable_customer_id
+        %td{:style=>'text-align:left;'}
+          = bm_rule.receivables_account    

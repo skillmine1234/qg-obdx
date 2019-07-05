@@ -1,0 +1,129 @@
+%br
+%br
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+    #form-details
+      %h3 Biller Details 
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        - if !@bm_biller.nil?
+          %tr
+          %tr
+            %td.label Biller ID
+            %td.value
+              = @bm_biller.biller_code
+            %td#msg-error
+              = error_message_for(@bm_biller, :biller_code, :prepend_text => "")
+          %tr
+            %td.label Biller Name
+            %td.value
+              = @bm_biller.biller_name
+            %td#msg-error
+              = error_message_for(@bm_biller, :biller_name, :prepend_text => "")
+          %tr
+            %td.label Biller Category
+            %td.value
+              = @bm_biller.biller_category
+            %td#msg-error
+              = error_message_for(@bm_biller, :biller_category, :prepend_text => "")
+          %tr
+            %td.label Biller Location
+            %td.value
+              = @bm_biller.biller_location
+            %td#msg-error
+              = error_message_for(@bm_biller, :biller_location, :prepend_text => "")
+          %tr
+            %td.label Biller Type
+            %td.value
+              = @bm_biller.biller_type
+            %td#msg-error
+              = error_message_for(@bm_biller, :biller_type, :prepend_text => "")
+          %tr
+            %td.label Partial Pay
+            %td.value
+              = @bm_biller.partial_pay
+            %td#msg-error
+              = error_message_for(@bm_biller, :partial_pay, :prepend_text => "")
+          %tr
+            %td.label Biller Mode
+            %td.value
+              = @bm_biller.biller_mode
+            %td#msg-error
+              = error_message_for(@bm_biller, :biller_mode, :prepend_text => "")
+          %tr
+            %td.label Allowed Payment Method
+            %td.value
+              = @bm_biller.partial_pay
+            %td#msg-error
+              = error_message_for(@bm_biller, :allowed_payment_method, :prepend_text => "")
+          %tr
+            %td.label Allowed Payment Channels
+            %td.value
+              = @bm_biller.allowed_payment_channels
+            %td#msg-error
+              = error_message_for(@bm_biller, :allowed_payment_channels, :prepend_text => "")
+          %tr
+            %td.label Biller Status
+            %td.value
+              = @bm_biller.biller_status
+            %td#msg-error
+              = error_message_for(@bm_biller, :biller_status, :prepend_text => "")
+          %tr
+            %td.label Online Validation
+            %td.value
+              = @bm_biller.online_validation
+            %td#msg-error
+              = error_message_for(@bm_biller, :online_validation, :prepend_text => "")
+          %tr
+            %td.label Allowed AutoPay
+            %td.value
+              = @bm_biller.allowed_autopay
+            %td#msg-error
+              = error_message_for(@bm_biller, :allowed_autopay, :prepend_text => "")    
+          %tr
+            %td.label Pay After Duedate
+            %td.value
+              = @bm_biller.pay_after_duedate
+            %td#msg-error
+              = error_message_for(@bm_biller, :pay_after_duedate, :prepend_text => "")
+          %tr
+            %td.label Payment Amount Validation
+            %td.value
+              = @bm_biller.paymentamount_validation
+            %td#msg-error
+              = error_message_for(@bm_biller, :paymentamount_validation, :prepend_text => "")
+          %tr
+            %td.label Is Biller BBPS
+            %td.value
+              = @bm_biller.isbillerbbps
+            %td#msg-error
+              = error_message_for(@bm_biller, :isbillerbbps, :prepend_text => "")
+          %tr
+            %td.label Additional Validation
+            %td.value
+              = @bm_biller.additional_validation
+            %td#msg-error
+              = error_message_for(@bm_biller, :additional_validation, :prepend_text => "") 
+          %tr
+            %td.label Created By
+            %td.value
+              = @bm_biller.created_user.try(:username)
+            %td#msg-error
+              = error_message_for(@bm_biller, :created_by, :prepend_text => "")
+          %tr
+            %td.label Updated By
+            %td.value
+              = @bm_biller.updated_user.try(:username)
+            %td#msg-error
+              = error_message_for(@bm_biller, :updated_by, :prepend_text => "")
+          %tr
+            %td.label Created At
+            %td.value
+              = @bm_biller.created_at
+            %td#msg-error
+              = error_message_for(@bm_biller, :created_at, :prepend_text => "")
+          %tr
+            %td.label Updated At
+            %td.value
+              = @bm_biller.updated_at
+            %td#msg-error
+              = error_message_for(@bm_biller, :updated_at, :prepend_text => "")

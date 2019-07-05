@@ -1,0 +1,27 @@
+= form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
+  .control-group
+    = label_tag "Biller ID", "Biller ID", :class => 'control-label'
+    = text_field_tag :billerid, params[:billerid]
+  .control-group
+    = label_tag "Biller Name", "Biller Name", :class => 'control-label'
+    = text_field_tag :biller_name, params[:biller_name]
+  .control-group
+    = label_tag "Biller Category", "Biller Category", :class => 'control-label'
+    = text_field_tag :biller_category, params[:biller_category]
+  .control-group
+    = label_tag "Biller Location", "Biller Location", :class => 'control-label'
+    = text_field_tag :biller_category, params[:biller_location]  
+  .control-group
+    = label_tag "Biller Type", "Biller Type", :class => 'control-label'
+    = text_field_tag :biller_type, params[:biller_type]  
+  .control-group
+    = label_tag "Biller Mode", "Biller Mode", :class => 'control-label'
+    = text_field_tag :biller_mode, params[:biller_mode]  
+  .form-actions
+    = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
+    = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'bm_biller_reset'
+  = hidden_field_tag :advanced_search, :true
+
+:javascript
+  var in_advanced_search = true;
+

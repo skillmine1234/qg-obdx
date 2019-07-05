@@ -1,0 +1,64 @@
+%br
+= link_to 'New Aggregator Payment', new_bm_aggregator_payment_path
+%br
+%br
+%h1 Listing Aggregator Payments
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
+%br
+= "Total Count: #{@bm_aggregator_payments_count}"
+%br
+= will_paginate @bm_aggregator_payments
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    / %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Pool Account No
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      NEFT Sender IFSC
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      NEFT Sender Account No    
+    %th{:style=>'text-align:left; background-color: lightblue;'} 
+      Beneficiary Account No
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Beneficiary Account IFSC
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Payment Amount
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Payment Date
+
+  .tbody
+    - @bm_aggregator_payments.each do |bm_aggregator_payment|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', bm_aggregator_payment
+        %td{:style=>'text-align:left;'}
+          - if bm_aggregator_payment.approval_status == 'U'
+            = link_to 'Edit', edit_bm_aggregator_payment_path(bm_aggregator_payment)
+          - else
+            = ""
+        / %td{:style=>'text-align:left;'}
+        /   - if bm_aggregator_payment.approval_status == 'U'
+        /     = link_to 'Delete', bm_aggregator_payment, :method => :delete
+        /   - else
+        /     = ""
+        %td{:style=>'text-align:left;'}
+          = bm_aggregator_payment.cod_acct_no
+        %td{:style=>'text-align:left;'}
+          = bm_aggregator_payment.neft_sender_ifsc
+        %td{:style=>'text-align:left;'}
+          = bm_aggregator_payment.bene_acct_no
+        %td{:style=>'text-align:left;'}
+          = bm_aggregator_payment.bene_acct_ifsc
+        %td{:style=>'text-align:left;'}
+          = bm_aggregator_payment.neft_sender_account    
+        %td{:style=>'text-align:left;'}
+          = bm_aggregator_payment.payment_amount
+        %td{:style=>'text-align:left;'}
+          = bm_aggregator_payment.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")

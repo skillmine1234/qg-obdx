@@ -1,0 +1,7 @@
+en:
+  menu:
+    obdx_bm_rule: 'OBDX Bill Payment Rules'
+    obdx_bm_biller: 'OBDX Billers'
+    obdx_bm_bill_payment: 'OBDX Bill Payments'
+    obdx_bm_bill_payments_summary: 'OBDX Bill Payments Summary'
+    obdx_bm_app: 'OBDX BM Apps'

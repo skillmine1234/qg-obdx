@@ -1,0 +1,63 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+    #form-details
+      %h3 BM App Details 
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        - can = can? :edit, @bm_app
+        %a.btn{:href => "#{!(can) ? '#' : '/obdx_bm_apps/' + @bm_app.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'obdx_bm_billers/approve', :@record => @bm_app
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        - if !@bm_app.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@bm_app)}", :controller => :bm_apps, :action => :audit_logs, :version_id => audit_count(@bm_app), :id => @bm_app.id
+          %tr
+            %td.label Form Errors
+            %td.value
+              = ' '
+            %td#msg-error
+              = error_message_for(@bm_app, :base, :prepend_text => "")
+          %tr
+            %td.label App ID
+            %td.value
+              = @bm_app.app_id
+            %td#msg-error
+              = error_message_for(@bm_app, :app_id, :prepend_text => "")
+          %tr
+            %td.label Channel ID
+            %td.value
+              = @bm_app.channel_id
+            %td#msg-error
+              = error_message_for(@bm_app, :channel_id, :prepend_text => "")
+          %tr
+            %td.label Needs OTP
+            %td.value
+              = @bm_app.needs_otp
+            %td#msg-error
+              = error_message_for(@bm_app, :needs_otp, :prepend_text => "")
+          %tr
+            %td.label Created By
+            %td.value
+              = @bm_app.created_user.try(:username)
+            %td#msg-error
+              = error_message_for(@bm_app, :created_by, :prepend_text => "")
+          %tr
+            %td.label Updated By
+            %td.value
+              = @bm_app.updated_user.try(:username)
+            %td#msg-error
+              = error_message_for(@bm_app, :updated_by, :prepend_text => "")
+          %tr
+            %td.label Created At
+            %td.value
+              = @bm_app.created_at
+            %td#msg-error
+              = error_message_for(@bm_app, :created_at, :prepend_text => "")
+          %tr
+            %td.label Updated At
+            %td.value
+              = @bm_app.updated_at
+            %td#msg-error
+              = error_message_for(@bm_app, :updated_at, :prepend_text => "")

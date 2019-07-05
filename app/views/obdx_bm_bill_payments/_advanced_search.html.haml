@@ -1,0 +1,43 @@
+= form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
+  .control-group
+    = label_tag "OBDX Reference Number", nil, :class => 'control-label'
+    = text_field_tag :req_no, params[:req_no]
+  .control-group
+    = label_tag "Customer ID", nil, :class => 'control-label'
+    = text_field_tag :cust_id, params[:cust_id]  
+  .control-group
+    = label_tag "Account Number", nil, :class => 'control-label'
+    = text_field_tag :debit_account_no, params[:debit_account_no]  
+  .control-group
+    = label_tag "Biller ID", nil, :class => 'control-label'
+    = text_field_tag :biller_id, params[:biller_id]  
+  .control-group
+    = label_tag "Biller Acoount ID", nil, :class => 'control-label'
+    = text_field_tag :biller_acct_id, params[:biller_acct_id]  
+  .control-group
+    = label_tag "Status", nil, :class => 'control-label'
+    = text_field_tag :status, params[:status]  
+  .control-group
+    = label_tag "ESB Reference Number", nil, :class => 'control-label'
+    = text_field_tag :billpay_req_ref, params[:billpay_req_ref]  
+  .control-group
+    = label_tag "BillPay Reference Number", nil, :class => 'control-label'
+    = text_field_tag :billpay_rep_ref, params[:billpay_rep_ref]  
+  .control-group
+    = label_tag "Biller Status", nil, :class => 'control-label'
+    = text_field_tag :biller_status, params[:biller_status]  
+  .control-group
+    = label_tag "Payment Status", nil, :class => 'control-label'
+    = text_field_tag :payment_status, params[:payment_status]  
+  .control-group
+    = label_tag "Payment Mode", nil, :class => 'control-label'
+    = text_field_tag :payment_method, params[:payment_method]  
+  .control-group
+    = label_tag "Is Biller BBPS", nil, :class => 'control-label'
+    = text_field_tag :isbbps, params[:isbbps]
+    = hidden_field_tag :advanced_search, :true                      
+  .form-actions
+    = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
+    = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'bm_bill_payment_reset'
+:javascript
+  var in_advanced_search = true;

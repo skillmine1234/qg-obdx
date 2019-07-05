@@ -1,0 +1,131 @@
+= simple_form_for @bm_biller, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "bm_biller_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@bm_biller, :base, :prepend_text => "")
+  .form-main
+    = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version
+    .control-group
+      = f.label :biller_code, "*Biller Code", :class => 'control-label'
+      = f.text_field :biller_code, :maxlength => 20
+      #msg-error
+        = error_message_for(@bm_biller, :biller_code, :prepend_text => "")
+    .control-group
+      = f.label :biller_name, "*Biller Name", :class => 'control-label'
+      = f.text_field :biller_name, :maxlength => 100
+      #msg-error
+        = error_message_for(@bm_biller, :biller_name, :prepend_text => "")
+    .control-group
+      = f.label :biller_category, "*Biller Category", :class => 'control-label'
+      = f.text_field :biller_category, :maxlength => 100
+      #msg-error
+        = error_message_for(@bm_biller, :biller_category, :prepend_text => "")
+    .control-group
+      = f.label :biller_location, "*Biller Location", :class => 'control-label'
+      = f.text_field :biller_location, :maxlength => 25
+      #msg-error
+        = error_message_for(@bm_biller, :biller_location, :prepend_text => "")
+    .control-group
+      = f.label :processing_method, "*Biller Type", :class => 'control-label'
+      = f.select :processing_method, options_for_select(BmBiller.options_for_processing_method, @bm_biller.processing_method),:prompt => 'SELECT'
+      #msg-error
+        = error_message_for(@bm_biller, :processing_method, :prepend_text => "")
+    .control-group
+      = f.label :is_enabled, "*Is Enabled?", :class => 'control-label'
+      = f.check_box :is_enabled, {},"Y","N"
+      #msg-error
+        = error_message_for(@bm_biller, :is_enabled, :prepend_text => "")
+    .control-group
+      = f.label :partial_pay, "Partial Pay", :class => 'control-label'
+      = f.check_box :partial_pay, {},"Y","N"
+      #msg-error
+        = error_message_for(@bm_biller, :partial_pay, :prepend_text => "")
+    .control-group
+      = f.label :num_params, "*No. Of Parameters", :class => 'control-label'
+      = f.number_field :num_params, :min => 0, :max => 5
+      #msg-error
+        = error_message_for(@bm_biller, :num_params, :prepend_text => "")
+    .control-group
+      = f.label :param1_name, "Parameter 1 Name", :class => 'control-label'
+      = f.text_field :param1_name, :maxlength => 100
+      #msg-error
+        = error_message_for(@bm_biller, :param1_name, :prepend_text => "")
+    .control-group
+      = f.label :param1_pattern, "Parameter 1 Pattern", :class => 'control-label'
+      = f.text_field :param1_pattern, :maxlength => 100
+      #msg-error
+        = error_message_for(@bm_biller, :param1_pattern, :prepend_text => "")
+    .control-group
+      = f.label :param1_tooltip, "Parameter 1 Tooltip", :class => 'control-label'
+      = f.text_area :param1_tooltip, :style => 'height:100px', :maxlength => 255
+      #msg-error
+        = error_message_for(@bm_biller, :param1_tooltip, :prepend_text => "")
+    .control-group
+      = f.label :param2_name, "Parameter 2 Name", :class => 'control-label'
+      = f.text_field :param2_name, :maxlength => 100
+      #msg-error
+        = error_message_for(@bm_biller, :param2_name, :prepend_text => "")
+    .control-group
+      = f.label :param2_pattern, "Parameter 2 Pattern", :class => 'control-label'
+      = f.text_field :param2_pattern, :maxlength => 100
+      #msg-error
+        = error_message_for(@bm_biller, :param2_pattern, :prepend_text => "")
+    .control-group
+      = f.label :param2_tooltip, "Parameter 2 Tooltip", :class => 'control-label'
+      = f.text_area :param2_tooltip, :style => 'height:100px', :maxlength => 255
+      #msg-error
+        = error_message_for(@bm_biller, :param2_tooltip, :prepend_text => "")
+  .form-extended
+    .control-group
+      = f.label :param3_name, "Parameter 3 Name", :class => 'control-label'
+      = f.text_field :param3_name, :maxlength => 100
+      #msg-error
+        = error_message_for(@bm_biller, :param3_name, :prepend_text => "")
+    .control-group
+      = f.label :param3_pattern, "Parameter 3 Pattern", :class => 'control-label'
+      = f.text_field :param3_pattern, :maxlength => 100
+      #msg-error
+        = error_message_for(@bm_biller, :param3_pattern, :prepend_text => "")
+    .control-group
+      = f.label :param3_tooltip, "Parameter 3 Tooltip", :class => 'control-label'
+      = f.text_area :param3_tooltip, :style => 'height:100px', :maxlength => 255
+      #msg-error
+        = error_message_for(@bm_biller, :param3_tooltip, :prepend_text => "")
+    .control-group
+      = f.label :param4_name, "Parameter 4 Name", :class => 'control-label'
+      = f.text_field :param4_name, :maxlength => 100
+      #msg-error
+        = error_message_for(@bm_biller, :param4_name, :prepend_text => "")
+    .control-group
+      = f.label :param4_pattern, "Parameter 4 Pattern", :class => 'control-label'
+      = f.text_field :param4_pattern, :maxlength => 100
+      #msg-error
+        = error_message_for(@bm_biller, :param4_pattern, :prepend_text => "")
+    .control-group
+      = f.label :param4_tooltip, "Parameter 4 Tooltip", :class => 'control-label'
+      = f.text_area :param4_tooltip, :style => 'height:100px', :maxlength => 255
+      #msg-error
+        = error_message_for(@bm_biller, :param4_tooltip, :prepend_text => "")
+    .control-group
+      = f.label :param5_name, "Parameter 5 Name", :class => 'control-label'
+      = f.text_field :param5_name, :maxlength => 100
+      #msg-error
+        = error_message_for(@bm_biller, :param5_name, :prepend_text => "")
+    .control-group
+      = f.label :param5_pattern, "Parameter 5 Pattern", :class => 'control-label'
+      = f.text_field :param5_pattern, :maxlength => 100
+      #msg-error
+        = error_message_for(@bm_biller, :param5_pattern, :prepend_text => "")
+    .control-group
+      = f.label :param5_tooltip, "Parameter 5 Tooltip", :class => 'control-label'
+      = f.text_area :param5_tooltip, :style => 'height:100px', :maxlength => 255
+      #msg-error
+        = error_message_for(@bm_biller, :param5_tooltip, :prepend_text => "")
+        
+
+  .form-actions
+    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_biller', :value => label_name + ' Biller'
+    = link_to :Cancel,'/bm_billers', :name => 'cancel', :class=>"cancel btn"

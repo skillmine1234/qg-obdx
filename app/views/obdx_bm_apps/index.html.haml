@@ -1,0 +1,39 @@
+%br
+= link_to 'New BM App', new_obdx_bm_app_path
+%br
+%br
+%h1 Listing BM Apps
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
+%br
+= "Total Count: #{@bm_apps_count}"
+%br
+= will_paginate @bm_apps
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      App ID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Channel ID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Needs OTP
+
+  .tbody
+    - @bm_apps.each do |bm_app|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', bm_app
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_obdx_bm_app_path(bm_app)
+        %td{:style=>'text-align:left;'}
+          = bm_app.app_id
+        %td{:style=>'text-align:left;'}
+          = bm_app.channel_id
+        %td{:style=>'text-align:left;'}
+          = bm_app.needs_otp

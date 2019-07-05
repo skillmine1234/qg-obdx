@@ -1,0 +1,74 @@
+= simple_form_for @bm_rule, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "bm_rule_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@bm_rule, :base, :prepend_text => "")
+  .form-main{:style => 'width:100%'}
+    = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version
+    .control-group
+      = f.label :app_id, "*App ID", :class => 'control-label'
+      = f.select(:app_id, ObdxBmApp.all.map { |key| [key.app_id, key.app_id] }, prompt: 'Select')
+      #msg-error
+        = error_message_for(@bm_rule, :app_id, :prepend_text => "")
+    .control-group
+      = f.label :aggregate_cod_acc_no, "*Aggregator Pool Account", :class => 'control-label'
+      = f.text_field :aggregate_cod_acct_no, :maxlength => 16
+      #msg-error
+        = error_message_for(@bm_rule, :cod_acct_no, :prepend_text => "")
+    .control-group
+      = f.label :customer_id, "*Customer ID", :class => 'control-label'
+      = f.text_field :customer_id, :maxlength => 15
+      #msg-error
+        = error_message_for(@bm_rule, :customer_id, :prepend_text => "")
+    .control-group
+      = f.label :bene_acct_no, "*Beneficiary Account No", :class => 'control-label'
+      = f.text_field :bene_account_no, :maxlength => 16
+      #msg-error
+        = error_message_for(@bm_rule, :bene_acct_no, :prepend_text => "")
+    .control-group
+      = f.label :bene_account_ifsc, "*Beneficiary Account IFSC", :class => 'control-label'
+      = f.text_field :bene_account_ifsc, :maxlength => 11
+      #msg-error
+        = error_message_for(@bm_rule, :bene_account_ifsc, :prepend_text => "")
+    .control-group
+      = f.label :neft_sender_ifsc, "*NEFT Sender IFSC", :class => 'control-label'
+      = f.text_field :neft_sender_ifsc, :maxlength => 11
+      #msg-error
+        = error_message_for(@bm_rule, :neft_sender_ifsc, :prepend_text => "")
+    .control-group
+      = f.label :source_id, "*Source ID", :class => 'control-label'
+      = f.text_field :source_id, :maxlength => 50
+      #msg-error
+        = error_message_for(@bm_rule, :source_id, :prepend_text => "")
+    .control-group
+      = f.label :traceid_prefix, "*Trace ID Prefix", :class => 'control-label'
+      = f.number_field :traceid_prefix
+      #msg-error
+        = error_message_for(@bm_rule, :traceid_prefix, :prepend_text => "")
+    .control-group
+      = f.label :payment_mode, "payment Mode", :class => 'control-label'
+      = f.select :payment_mode,ObdxBmRule::PAYMENT_MODE,:prompt=>"Please select payment option"
+      #msg-error
+        = error_message_for(@bm_rule, :payment_mode, :prepend_text => "")
+    .control-group
+      = f.label :receivable_customer_id, "Receivable Customer Id", :class => 'control-label'
+      = f.text_field :receivable_customer_id,:maxlength => 20
+      #msg-error
+        = error_message_for(@bm_rule, :receivable_customer_id, :prepend_text => "")
+    .control-group
+      = f.label :receivables_account, "Receivable Account", :class => 'control-label'
+      = f.text_field :receivable_account,:maxlength => 20
+      #msg-error
+        = error_message_for(@bm_rule, :receivable_account, :prepend_text => "")
+    .control-group
+      = f.label :isbbps, "Is BBPS", :class => 'control-label'
+      = f.check_box :isbbps, {},"Y","N"
+      #msg-error
+        = error_message_for(@bm_rule, :payment_mode, :prepend_text => "")    
+  .form-actions
+    - (f.object.new_record? and f.object.aggregate_cod_acc_no.nil?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_rule', :value => label_name + ' Bm Rules'
+    = link_to :Cancel,'/obdx_bm_rules', :name => 'cancel', :class=>"cancel btn"
+

@@ -1,0 +1,98 @@
+%br
+= #link_to 'New Biller', new_bm_biller_path
+%br
+%br
+%h1 Listing Billers
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
+%br
+= "Total Count: #{@bm_billers_count}"
+%br
+= will_paginate @bm_billers
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Object ID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Biller ID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Biller Name
+    %th{:style=>'text-align:left; background-color: lightblue;'} 
+      Biller Category
+    %th{:style=>'text-align:left; background-color: lightblue;'} 
+      Biller Mode 
+    %th{:style=>'text-align:left; background-color: lightblue;'} 
+      Allowed Payment Methods 
+    %th{:style=>'text-align:left; background-color: lightblue;'} 
+      Allowed Payment Channels
+    %th{:style=>'text-align:left; background-color: lightblue;'} 
+      Biller Status          
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Biller Location
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Biller Type
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Partial Pay
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Pay After DueDate
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Online Validation
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Allowed AutoPay  
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Payment Amount Validation  
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Is Biller BBPS
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Additional Validation
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Authenticator List      
+    
+  .tbody
+    - @bm_billers.each do |bm_biller|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', bm_biller
+        %td{:style=>'text-align:left;'}
+          = bm_biller.objectid
+        %td{:style=>'text-align:left;'}
+          = bm_biller.billerid  
+        %td{:style=>'text-align:left;'}
+          = bm_biller.biller_name
+        %td{:style=>'text-align:left;'}
+          = bm_biller.biller_category
+        %td{:style=>'text-align:left;'}
+          = bm_biller.biller_mode  
+        %td{:style=>'text-align:left;'}
+          = bm_biller.allowed_payment_method
+        %td{:style=>'text-align:left;'}
+          = bm_biller.allowed_payment_channels
+        %td{:style=>'text-align:left;'}
+          = bm_biller.biller_status              
+        %td{:style=>'text-align:left;'}
+          = bm_biller.biller_location
+        %td{:style=>'text-align:left;'}
+          = bm_biller.biller_type
+        %td{:style=>'text-align:left;'}
+          = bm_biller.partial_pay
+        %td{:style=>'text-align:left;'}
+          = bm_biller.online_validation
+        %td{:style=>'text-align:left;'}
+          = bm_biller.allowed_autopay  
+        %td{:style=>'text-align:left;'}
+          = bm_biller.pay_after_duedate
+        %td{:style=>'text-align:left;'}
+          = bm_biller.paymentamount_validation
+        %td{:style=>'text-align:left;'}
+          = bm_biller.isbillerbbps
+        %td{:style=>'text-align:left;'}
+          = bm_biller.additional_validation
+        %td{:style=>'text-align:left;'}
+          = bm_biller.parameter_name  
+            

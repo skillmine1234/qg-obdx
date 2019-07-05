@@ -1,0 +1,35 @@
+= form_tag '', :method => 'get', :class => 'form-horizontal', :autocomplete=>"off" do
+  .control-group
+    = label_tag "Pool Account No", "Pool Account No", :class => 'control-label'
+    = text_field_tag :cod_acct_no, params[:cod_acct_no]
+  .control-group
+    = label_tag "NEFT Sender IFSC", "NEFT Sender IFSC", :class => 'control-label'
+    = text_field_tag :neft_sender_ifsc, params[:neft_sender_ifsc]
+  .control-group
+    = label_tag "Beneficiary Account No", "Beneficiary Account No", :class => 'control-label'
+    = text_field_tag :bene_acct_no, params[:bene_acct_no]
+  .control-group
+    = label_tag "Beneficiary Account IFSC", "Beneficiary Account IFSC", :class => 'control-label'
+    = text_field_tag :bene_account_ifsc, params[:bene_account_ifsc]
+  .control-group
+    = label_tag "Payment Amount", nil, :class => 'control-label'
+    = text_field_tag :from_amount, params[:from_amount]
+    To
+    = text_field_tag :to_amount, params[:to_amount]
+  .control-group
+    = label_tag "Payment Date", "Payment Date", :class => 'control-label'
+    = text_field_tag :from_date, params[:from_date]
+    To
+    = text_field_tag :to_date, params[:to_date]
+  .control-group
+    = label_tag "Status", nil, :class => 'control-label'
+    = select_tag :status, options_for_select([['NEW','NEW'],['IN_PROCESS','IN_PROCESS'],['FAILED','FAILED'],['COMPLETED','COMPLETED']],params[:status]),:prompt => 'ANY'
+
+  .form-actions
+    = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button"
+    = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'bm_aggr_reset'
+  = hidden_field_tag :advanced_search, :true
+
+:javascript
+  var in_advanced_search = true;
+

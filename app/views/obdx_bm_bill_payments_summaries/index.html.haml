@@ -1,0 +1,29 @@
+%br
+%br
+%h1 Bill Payment Summary
+%br
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead 
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Status
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Pending Approval
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Total
+  .tbody
+    - @bm_bill_payments_statuses.each do |s|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = s 
+        %td{:style=>'text-align:left;'}
+          = link_to payment_summary_count(@bm_bill_payments_summary, [s,'Y']), obdx_bm_bill_payments_path({:status => s, :pending => 'Y', :summary => true})
+        %td{:style=>'text-align:left;'}
+          = link_to payment_summary_count(@bm_bill_payments_summary, [s, 'Y']) + payment_summary_count(@bm_bill_payments_summary, [s, 'N']) +  payment_summary_count(@bm_bill_payments_summary, [s, nil]), obdx_bm_bill_payments_path({:status => s, :summary => true})
+    %tr
+      %td{:style=>'text-align:left;'}
+        = 'ALL'
+      %td{:style=>'text-align:left;'}
+        = link_to @total_pending_records, obdx_bm_bill_payments_path({:pending => 'Y', :summary => true})
+      %td{:style=>'text-align:left;'}
+        = link_to @total_records, obdx_bm_bill_payments_path

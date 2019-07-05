@@ -1,0 +1,186 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+    #form-details
+      %h3 Aggregator Payment Details 
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        - unless @bm_aggregator_payment.approval_status == 'A'
+          - can = can? :edit, @bm_aggregator_payment
+          %a.btn{:href => "#{!(can) ? '#' : '/bm_aggregator_payments/' + @bm_aggregator_payment.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'bm_billers/approve', :@record => @bm_aggregator_payment
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        - if !@bm_aggregator_payment.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@bm_aggregator_payment)}", :controller => :bm_aggregator_payments, :action => :audit_logs, :version_id => audit_count(@bm_aggregator_payment), :id => @bm_aggregator_payment.id
+			
+      - if @bm_aggregator_payment.approval_status == 'A' and @bm_aggregator_payment.status == 'NEW'
+        %div{:style=>'padding-left: 1000px;'}
+          = link_to 'Hit Api', hit_api_path(@bm_aggregator_payment.id), :class => 'btn'
+							
+.show_ticket
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
+    %h3
+      Status:
+      = @bm_aggregator_payment.status
+      %tr
+        - if @bm_aggregator_payment.status == "FAILED"
+          = link_to "Fault Text", "#", :class => 'fault-link', :href => "#faultText", :style => "font-weight:100"
+    %h3
+      Payment Date:
+      = @bm_aggregator_payment.created_at.try(:strftime, "%d/%m/%Y %I:%M%p") rescue nil
+    %h3
+      Request XML:
+      - unless @bm_aggregator_payment.bm_audit_log.nil?
+        = link_to "Show Request", "#", :class => 'request-link', :href => "#requestText", data: { request: @bm_aggregator_payment.bm_audit_log.req_bitstream }
+      - else 
+        = "-"
+    %h3
+      Request Timestamp:
+      = @bm_aggregator_payment.bm_audit_log.req_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p") rescue nil
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
+    %h3 
+      Reconciled? :
+      = @bm_aggregator_payment.is_reconciled
+    %h3 
+      Reconciled At :
+      = @bm_aggregator_payment.reconciled_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+    %h3 
+      Reply:
+      - unless @bm_aggregator_payment.bm_audit_log.nil?
+        = link_to "Show Response", "#", :class => 'reply-link', :href => "#replyText", data: { reply: @bm_aggregator_payment.bm_audit_log.rep_bitstream }
+    %h3
+      Response Timestamp:
+      = @bm_aggregator_payment.bm_audit_log.rep_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p") rescue nil
+
+  .header-form-main{:style=>'background-color: #F1F2F8; width: 100%; height: 300px; display: inline-block;'}
+    #ticket-details
+      %h3
+        Request Details:
+      %table.table.no-border{:style=>"table-layout: fixed; width: 50%"}
+        %tr
+          %td.label Pool Account No
+          %td.value
+            = @bm_aggregator_payment.cod_acct_no
+          %td#msg-error
+            = error_message_for(@bm_aggregator_payment, :cod_acct_no, :prepend_text => "")
+        %tr
+          %td.label NEFT Sender IFSC
+          %td.value
+            = @bm_aggregator_payment.neft_sender_ifsc
+          %td#msg-error
+            = error_message_for(@bm_aggregator_payment, :neft_sender_ifsc, :prepend_text => "")
+        %tr
+          %td.label NEFT Sender Account
+          %td.value
+            = @bm_aggregator_payment.neft_sender_account
+          %td#msg-error
+            = error_message_for(@bm_aggregator_payment, :neft_sender_account, :prepend_text => "")    
+        %tr
+          %td.label Payment Amount
+          %td.value
+            = @bm_aggregator_payment.payment_amount
+          %td#msg-error
+            = error_message_for(@bm_aggregator_payment, :payment_amount, :prepend_text => "")
+        %tr
+          %td.label Beneficiary Account No
+          %td.value
+            = @bm_aggregator_payment.bene_acct_no
+          %td#msg-error
+            = error_message_for(@bm_aggregator_payment, :bene_acct_no, :prepend_text => "")
+        %tr
+          %td.label Beneficiary Account IFSC
+          %td.value
+            = @bm_aggregator_payment.bene_acct_ifsc
+          %td#msg-error
+            = error_message_for(@bm_aggregator_payment, :bene_acct_ifsc, :prepend_text => "")
+        %tr
+          %td.label Beneficiary Account Number
+          %td.value
+            = @bm_aggregator_payment.benfficiary_account_number
+          %td#msg-error
+            = error_message_for(@bm_aggregator_payment, :benfficiary_account_number, :prepend_text => "")    
+        %tr
+          %td.label Customer ID
+          %td.value
+            = @bm_aggregator_payment.customer_id
+          %td#msg-error
+            = error_message_for(@bm_aggregator_payment, :customer_id, :prepend_text => "")
+        %tr
+          %td.label Service ID
+          %td.value
+            = @bm_aggregator_payment.service_id
+          %td#msg-error
+            = error_message_for(@bm_aggregator_payment, :service_id, :prepend_text => "")
+        %tr
+          %td.label Remitter To Bene Note
+          %td.value
+            = @bm_aggregator_payment.rmtr_to_bene_note
+          %td#msg-error
+            = error_message_for(@bm_aggregator_payment, :rmtr_to_bene_note, :prepend_text => "")
+
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 100%; height: 300px; display: inline-block;'}
+    #ticket-details	
+      %h3
+        NEFT Result:
+      %table.table.no-border{:style=>"table-layout: fixed; width: 50%"}
+        %tr
+          %td.label NEFT Request Reference
+          %td.value
+            = @bm_aggregator_payment.neft_req_ref
+        %tr
+          %td.label NEFT Attempt No
+          %td.value
+            = @bm_aggregator_payment.neft_attempt_no
+        %tr
+          %td.label NEFT Attempt At
+          %td.value
+            = @bm_aggregator_payment.neft_attempt_at
+        %tr
+          %td.label NEFT Reply Reference
+          %td.value
+            = @bm_aggregator_payment.neft_rep_ref
+        %tr
+          %td.label NEFT Completed At
+          %td.value
+            = @bm_aggregator_payment.neft_completed_at
+
+#requestText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Request
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    .demo-area
+      %button#d_clip_button1.my_clip_button1{"data-clipboard-target" => "req_xml"}
+        %b Copy To Clipboard...
+    %pre#req_xml{:style => 'word-wrap: break-word'}
+      .request{:style => 'word-wrap: break-word'}
+#replyText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Reply
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    .demo-area
+      %button#d_clip_button2.my_clip_button2{"data-clipboard-target" => "reply_xml"}
+        %b Copy To Clipboard...
+    %pre#reply_xml{:style => 'word-wrap: break-word'}
+      .reply{:style => 'word-wrap: break-word'}
+
+#faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Fault Text
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    .demo-area
+    %pre#fault_text{:style => 'word-wrap: break-word'}
+    %table.table.no-border
+      %tr
+        %td.label Fault Code: 
+        %td= @bm_aggregator_payment.fault_code
+      %tr
+        %td.label Fault Reason:
+        %td= @bm_aggregator_payment.fault_reason

@@ -1,0 +1,71 @@
+%br
+%h1 Listing Bill Payments
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = render :partial => 'advanced_search'
+%br
+= "Total Count: #{@bm_bill_payments_count}"
+%br
+= will_paginate @bm_bill_payments
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      OBDX Reference No
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Customer ID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Payment Status    
+    %th{:style=>'Text-align:left; background-color: lightblue;'}
+      Account Number
+    %th{:style=>'Text-align:left; background-color: lightblue;'}
+      Biller ID
+    %th{:style=>'Text-align:left; background-color: lightblue;'}
+      Biller Account ID
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Status
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      ESB Reference Number
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Bill Pay Reference Number 
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Biller Status
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Payment Status
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Payment Mode    
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Is Biller BBPS
+  .tbody
+    - @bm_bill_payments.each do |bm_bill_payment|   
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', bm_bill_payment
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.req_no
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.customer_id
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.debit_account_no    
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.biller_id
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.biller_acct_id
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.status
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.billpay_req_ref
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.billpay_rep_ref
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.biller_status
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.payment_status
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.payment_method
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.isbbps  
+        %td{:style=>'text-align:left;'}
+          = bm_bill_payment.billpaid_at.try(:strftime, "%d/%m/%Y %I:%M%p") rescue nil

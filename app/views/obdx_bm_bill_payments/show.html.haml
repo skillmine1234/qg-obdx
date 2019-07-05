@@ -1,0 +1,249 @@
+.show_ticket
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'} 
+    %h3
+      App Id:
+      = @bill_payment.app_id
+    %h3
+      Request No:
+      = @bill_payment.req_no
+    %h3
+      Attempt No:
+      = @bill_payment.attempt_no
+    %h3
+      Audit Logs:
+      = link_to 'Show', {:controller => 'bm_bill_payments', :action => 'audit_logs', :id => @bill_payment.id, :step_name => 'ALL'}
+  .header-form-extended{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
+    %h3
+      Status:
+      = @bill_payment.status
+      %tr
+        - if @bill_payment.status == "FAILED"
+          = link_to "Fault Text", "#", :class => 'fault-link', :href => "#faultText", :style => "font-weight:100"
+    %h3 
+      Reconciled?:
+      = @bill_payment.is_reconciled
+    %h3 
+      Reconciled At:
+      = @bill_payment.is_reconciled.try(:strftime, "%d/%m/%Y %I:%M%p")
+  .header-form-main{:style=>'background-color: #F1F2F8; width: 100%; display: inline-block;'}
+    %table.table.no-border{:style => 'word-wrap:break-word; table-layout: fixed; width: 50%; float:left;'}  
+      %tr
+        %td.label App ID 
+        %td= @bill_payment.app_id
+      %tr
+        %td.label Request Number
+        %td= @bill_payment.req_no
+      %tr
+        %td.label Attempt Number
+        %td= @bill_payment.attempt_no
+      %tr
+        %td.label Request Version
+        %td= @bill_payment.req_version
+      %tr
+        %td.label  Request Timestamp
+        %td= @bill_payment.req_timestamp
+      %tr
+        %td.label Customer ID
+        %td= @bill_payment.customer_id
+      %tr
+        %td.label Debit Account No
+        %td= @bill_payment.debit_account_no
+      %tr
+        %td.label Biller ID
+        %td= @bill_payment.biller_id
+      %tr
+        %td.label Biller Account ID
+        %td= @bill_payment.biller_acct_id
+      %tr
+        %td.label Bill ID
+        %td= @bill_payment.bill_id
+      %tr
+        %td.label Status
+        %td= @bill_payment.status
+      %tr
+        %td.label Fault Code
+        %td= @bill_payment.fault_code
+      %tr
+        %td.label Fault Reason
+        %td= @bill_payment.fault_reason
+      %tr
+        %td.label Debit Request Reference
+        %td= @bill_payment.debit_req_ref
+      %tr
+        %td.label Debit Attempt Number
+        %td= @bill_payment.debit_attempt_no
+      %tr
+        %td.label Debit Attmept At
+        %td= @bill_payment.debit_attempt_at
+      %tr
+        %td.label Debit Response Number
+        %td= @bill_payment.debit_rep_ref
+      %tr
+        %td.label Debited At
+        %td= @bill_payment.debited_at
+      %tr
+        %td.label BillPay Request Number
+        %td= @bill_payment.billpay_req_ref
+      %tr
+        %td.label Billpay Attempt Number
+        %td= @bill_payment.billpay_attempt_no
+      %tr
+        %td.label Billpay Attempt At
+        %td= @bill_payment.billpay_attempt_at
+      %tr
+        %td.label Billpay Response Number
+        %td= @bill_payment.billpay_rep_ref
+      %tr
+        %td.label Bill Paid At
+        %td= @bill_payment.billpaid_at
+      %tr
+        %td.label Reversal Request No
+        %td= @bill_payment.reversal_req_ref
+      %tr
+        %td.label Reversal Attempt No
+        %td= @bill_payment.reversal_attempt_no
+      %tr
+        %td.label Reversal Attempt At
+        %td= @bill_payment.reversal_attempt_at
+      %tr
+        %td.label Reversal Response Number
+        %td= @bill_payment.reversal_rep_ref
+      %tr
+        %td.label Reversal At
+        %td= @bill_payment.reversal_at
+      %tr
+        %td.label Is Reconciled
+        %td= @bill_payment.is_reconciled
+      %tr
+        %td.label Reconciled At
+        %td= @bill_payment.reconciled_at
+      %tr
+        %td.label Pending For Approval
+        %td= @bill_payment.pending_approval
+      %tr
+        %td.label Serevice Id
+        %td= @bill_payment.service_id
+      %tr
+        %td.label Response TimeStamp
+        %td= @bill_payment.rep_timestamp
+      %tr
+        %td.label Param1
+        %td= @bill_payment.param1
+      %tr
+        %td.label Param2
+        %td= @bill_payment.param2
+      %tr
+        %td.label Param3
+        %td= @bill_payment.param3
+      %tr
+        %td.label COD Pool Account Number
+        %td= @bill_payment.cod_pool_acct_no
+      %tr
+        %td.label Bill Pay Bank Refernce Number
+        %td= @bill_payment.billpay_bank_ref
+      %tr
+        %td.label Transaction Amount
+        %td= @bill_payment.txn_amount
+      %tr
+        %td.label Payment Remarks
+        %td= @bill_payment.payment_remarks
+      %tr
+        %td.label Payment Type
+        %td= @bill_payment.payment_type
+      %tr
+        %td.label Transaction Date
+        %td= @bill_payment.txn_date_time
+      %tr
+        %td.label Biller Approval Code
+        %td= @bill_payment.biller_approval_code
+      %tr
+        %td.label Biller Status
+        %td= @bill_payment.biller_status
+      %tr
+        %td.label Payment Method
+        %td= @bill_payment.payment_method
+      %tr
+        %td.label Payment Status
+        %td= @bill_payment.payment_status
+      %tr
+        %td.label COU Conv Fee
+        %td= @bill_payment.cou_conv_fee
+      %tr
+        %td.label BOU Conv Fee
+        %td= @bill_payment.bou_conv_fee
+      %tr
+        %td.label Card Start
+        %td= @bill_payment.card_start
+      %tr
+        %td.label Card End
+        %td= @bill_payment.card_end
+      %tr
+        %td.label Card Number
+        %td= @bill_payment.card_number
+      %tr
+        %td.label Card Holder
+        %td= @bill_payment.card_holder
+      %tr
+        %td.label  IFSC
+        %td= @bill_payment.ifsc
+      %tr
+        %td.label Credit Request Number
+        %td= @bill_payment.credit_req_ref
+      %tr
+        %td.label Credit Response Number
+        %td= @bill_payment.credit_rep_ref
+      %tr
+        %td.label Wallet Request Number
+        %td= @bill_payment.wallet_req_ref
+      %tr
+        %td.label Wallet Response Number
+        %td= @bill_payment.wallet_rep_ref
+      %tr
+        %td.label Credit Reversal Request Number
+        %td= @bill_payment.credit_reversal_req_ref
+      %tr
+        %td.label Credit Reversal Response Number
+        %td= @bill_payment.credit_reversal_rep_ref
+      %tr
+        %td.label Wallet Reversal Response number
+        %td= @bill_payment.wallet_reversal_rep_ref
+      %tr
+        %td.label Wallet Reversal Request Number
+        %td= @bill_payment.wallet_reversal_req_ref
+      %tr
+        %td.label GL Pool Account Number
+        %td= @bill_payment.gl_pool_acct_no
+      %tr
+        %td.label Credit Card Request Number
+        %td= @bill_payment.creditcard_req_ref
+      %tr
+        %td.label Credit Card Response Number
+        %td= @bill_payment.creditcard_rep_ref
+      %tr
+        %td.label Credit Card Reversal Number
+        %td= @bill_payment.creditcard_reversal_req_ref
+      %tr
+        %td.label Credit Card Reversal Response Number
+        %td= @bill_payment.creditcard_reversal_rep_ref
+      %tr
+        %td.label Is BBPS
+        %td= @bill_payment.isbbps
+      %tr
+        %td.label  Source ID
+        %td= @bill_payment.sourceid
+      %tr
+        %td.label Validation ID
+        %td= @bill_payment.validationid
+      %tr
+        %td.label Biller Category
+        %td= @bill_payment.billercategory
+      %tr
+        %td.label Transaction Type
+        %td= @bill_payment.transaction_type
+      %tr
+        %td.label Auth Code
+        %td= @bill_payment.auth_code
+      %tr
+        %td.label Store ID
+        %td= @bill_payment.store_id
+                                                                                                                                 

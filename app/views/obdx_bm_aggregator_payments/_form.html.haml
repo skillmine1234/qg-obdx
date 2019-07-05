@@ -1,0 +1,64 @@
+= simple_form_for @bm_aggregator_payment, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "bm_aggregator_payment_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@bm_aggregator_payment, :base, :prepend_text => "")
+  .form-main
+    = f.hidden_field :lock_version
+    = f.hidden_field :approved_id
+    = f.hidden_field :approved_version
+    .control-group
+      = f.label :cod_acct_no, "*Pool Account No", :class => 'control-label'
+      = f.text_field :cod_acct_no, :maxlength => 50, :value => BmAggregatorPayment.form_values("cod_acct_no")
+      #msg-error
+        = error_message_for(@bm_aggregator_payment, :cod_acct_no, :prepend_text => "")
+    .control-group
+      = f.label :neft_sender_ifsc, "*NEFT Sender IFSC", :class => 'control-label'
+      = f.text_field :neft_sender_ifsc, :maxlength => 11, :value => BmAggregatorPayment.form_values("neft_sender_ifsc")
+      #msg-error
+        = error_message_for(@bm_aggregator_payment, :neft_sender_ifsc, :prepend_text => "")
+    .control-group
+      = f.label :bene_name, "*Beneficiary Name", :class => 'control-label'
+      = f.text_field :bene_name, :maxlength => 50
+      #msg-error
+        = error_message_for(@bm_aggregator_payment, :bene_name, :prepend_text => "")
+    .control-group
+      = f.label :bene_acct_no, "*Beneficiary Account No", :class => 'control-label'
+      = f.text_field :bene_acct_no, :maxlength => 50, :value => BmAggregatorPayment.form_values("bene_acct_no")
+      #msg-error
+        = error_message_for(@bm_aggregator_payment, :bene_acct_no, :prepend_text => "")
+    .control-group
+      = f.label :bene_acct_ifsc, "*Beneficiary Account IFSC", :class => 'control-label'
+      = f.text_field :bene_acct_ifsc, :maxlength => 11, :value => BmAggregatorPayment.form_values("bene_acct_ifsc")
+      #msg-error
+        = error_message_for(@bm_aggregator_payment, :bene_acct_ifsc, :prepend_text => "")
+    .control-group
+      = f.label :customer_id, "*Customer ID", :class => 'control-label'
+      = f.text_field :customer_id, :value => BmAggregatorPayment.form_values("customer_id")
+      #msg-error
+        = error_message_for(@bm_aggregator_payment, :customer_id, :prepend_text => "")
+    .control-group
+      = f.label :service_id, "*Service ID", :class => 'control-label'
+      = f.text_field :service_id, :value => BmAggregatorPayment.form_values("service_id")
+      #msg-error
+        = error_message_for(@bm_aggregator_payment, :service_id, :prepend_text => "")
+    .control-group
+      = f.label :payment_amount, "*Payment Amount", :class => 'control-label'
+      = f.text_field :payment_amount
+      #msg-error
+        = error_message_for(@bm_aggregator_payment, :payment_amount, :prepend_text => "")
+    .control-group
+      = f.label :rmtr_name, "*Remitter Name", :class => 'control-label'
+      = f.text_field :rmtr_name, :maxlength => 100
+      #msg-error
+        = error_message_for(@bm_aggregator_payment, :rmtr_name, :prepend_text => "")
+    .control-group
+      = f.label :rmtr_to_bene_note, "*Remitter to Bene Note", :class => 'control-label'
+      = f.text_area :rmtr_to_bene_note, :maxlength => 255
+      #msg-error
+        = error_message_for(@bm_aggregator_payment, :rmtr_to_bene_note, :prepend_text => "")
+
+  .form-actions
+    - (f.object.new_record?) ? label_name = "Make" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_biller', :value => label_name + ' Payment'
+    = link_to :Cancel,'/bm_aggregator_payments', :name => 'cancel', :class=>"cancel btn"
