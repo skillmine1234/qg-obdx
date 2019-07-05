@@ -1,5 +1,5 @@
 class ObdxBmAggregatorPayment < ActiveRecord::Base
-  #establish_connection "obdx_#{Rails.env}"
+  establish_connection "obdx_#{Rails.env}"
   
   alias_attribute :cod_acct_no,:pool_account
   alias_attribute :bene_acct_no,:benfficiary_account_number

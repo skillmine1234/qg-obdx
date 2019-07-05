@@ -1,7 +1,7 @@
 class ObdxBmRule < ActiveRecord::Base
-  #establish_connection "obdx_#{Rails.env}"
-
+  establish_connection "obdx_#{Rails.env}"
   self.table_name = "bm_rules"
+  
   PAYMENT_MODE = ["CASA","CC","Wallet"]
   
   include Approval

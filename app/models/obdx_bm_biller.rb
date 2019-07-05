@@ -1,7 +1,6 @@
 class ObdxBmBiller < ActiveRecord::Base
-  #establish_connection "obdx_#{Rails.env}"
-  #self.table_name = "biller_details"
-  self.table_name = "bm_billers"
+  establish_connection "obdx_#{Rails.env}"
+  self.table_name = "biller_details"
 
   #include Approval
   #include BmApproval

@@ -1,6 +1,7 @@
 class ObdxBmApp < ActiveRecord::Base 
-  #establish_connection "obdx_#{Rails.env}"
+  establish_connection "obdx_#{Rails.env}"
   self.table_name = "bm_apps"
+
   
   include Approval
   include ObdxBmApproval

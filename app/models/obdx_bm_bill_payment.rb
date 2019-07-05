@@ -1,10 +1,10 @@
 class ObdxBmBillPayment < ActiveRecord::Base  
-  #establish_connection "obdx_#{Rails.env}"
-  
-  has_many :obdx_bm_billpay_steps
-
+  establish_connection "obdx_#{Rails.env}"
   self.table_name = "bm_bill_payments"
 
+  has_many :obdx_bm_billpay_steps
+
+  
   #validates_presence_of :app_id, :req_no, :attempt_no, :customer_id, :debit_account_no, :txn_kind,
                         #:txn_amount, :status
                         
