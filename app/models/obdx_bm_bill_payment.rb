@@ -11,12 +11,13 @@ class ObdxBmBillPayment < ActiveRecord::Base
   def self.find_bm_bill_payments(bm_bill_payment,params)
     bill_payments = bm_bill_payment
     bill_payments = bill_payments.where("bm_bill_payments.req_no LIKE ?","#{params[:req_no]}%") if params[:req_no].present?
-    bill_payments = bill_payments.where("bm_bill_payments.cust_id=?",params[:cust_id]) if params[:cust_id].present?
+    bill_payments = bill_payments.where("bm_bill_payments.customer_id=?",params[:customer_id]) if params[:customer_id].present?
     bill_payments = bill_payments.where("bm_bill_payments.debit_account_no=?",params[:debit_account_no]) if params[:debit_account_no].present?
     bill_payments = bill_payments.where("bm_bill_payments.biller_id=?",params[:biller_id]) if params[:biller_id].present?
     bill_payments = bill_payments.where("bm_bill_payments.biller_acct_id=?",params[:biller_acct_id]) if params[:biller_acct_id].present?
     bill_payments = bill_payments.where("bm_bill_payments.status=?",params[:status]) if params[:status].present?
     bill_payments = bill_payments.where("bm_bill_payments.billpay_req_ref=?",params[:billpay_req_ref]) if params[:billpay_req_ref].present?
+    bill_payments = bill_payments.where("bm_bill_payments.billpay_rep_ref=?",params[:billpay_rep_ref]) if params[:billpay_rep_ref].present?
     bill_payments = bill_payments.where("bm_bill_payments.biller_status=?",params[:biller_status]) if params[:biller_status].present?
     bill_payments = bill_payments.where("bm_bill_payments.payment_status=?",params[:payment_status]) if params[:payment_status].present?
     bill_payments = bill_payments.where("bm_bill_payments.payment_method=?",params[:payment_method]) if params[:payment_method].present?

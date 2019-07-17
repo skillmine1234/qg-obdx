@@ -11,7 +11,7 @@
       = @bill_payment.attempt_no
     %h3
       Audit Logs:
-      = link_to 'Show', {:controller => 'bm_bill_payments', :action => 'audit_logs', :id => @bill_payment.id, :step_name => 'ALL'}
+      = link_to 'Show', {:controller => 'obdx_bm_bill_payments', :action => 'audit_logs', :id => @bill_payment.id, :step_name => 'ALL'}
   .header-form-extended{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
     %h3
       Status:
