@@ -10,7 +10,7 @@
           %tr
             %td.label Biller ID
             %td.value
-              = @bm_biller.biller_code
+              = @bm_biller.billerid
             %td#msg-error
               = error_message_for(@bm_biller, :biller_code, :prepend_text => "")
           %tr
@@ -52,7 +52,7 @@
           %tr
             %td.label Allowed Payment Method
             %td.value
-              = @bm_biller.partial_pay
+              = @bm_biller.allowed_payment_method
             %td#msg-error
               = error_message_for(@bm_biller, :allowed_payment_method, :prepend_text => "")
           %tr
@@ -104,26 +104,8 @@
             %td#msg-error
               = error_message_for(@bm_biller, :additional_validation, :prepend_text => "") 
           %tr
-            %td.label Created By
+            %td.label Authenticator List
             %td.value
-              = @bm_biller.created_user.try(:username)
+              = @bm_biller.parameter_name
             %td#msg-error
-              = error_message_for(@bm_biller, :created_by, :prepend_text => "")
-          %tr
-            %td.label Updated By
-            %td.value
-              = @bm_biller.updated_user.try(:username)
-            %td#msg-error
-              = error_message_for(@bm_biller, :updated_by, :prepend_text => "")
-          %tr
-            %td.label Created At
-            %td.value
-              = @bm_biller.created_at
-            %td#msg-error
-              = error_message_for(@bm_biller, :created_at, :prepend_text => "")
-          %tr
-            %td.label Updated At
-            %td.value
-              = @bm_biller.updated_at
-            %td#msg-error
-              = error_message_for(@bm_biller, :updated_at, :prepend_text => "")
+              = error_message_for(@bm_biller, :parameter_name, :prepend_text => "")     
