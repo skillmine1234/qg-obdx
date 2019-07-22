@@ -1,6 +1,7 @@
 class ObdxBmApp < ActiveRecord::Base 
   establish_connection "obdx_#{Rails.env}"
   self.table_name = "bm_apps"
+  self.sequence_name = "bm_apps_seq"
 
   
   include Approval

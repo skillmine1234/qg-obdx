@@ -1,6 +1,7 @@
 class ObdxBmRule < ActiveRecord::Base
   establish_connection "obdx_#{Rails.env}"
   self.table_name = "bm_rules"
+  self.sequence_name = "bm_rules_seq"
   
   PAYMENT_MODE = ["CASA","CC","Wallet"]
   
