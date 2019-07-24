@@ -13,20 +13,20 @@
       #msg-error
         = error_message_for(@bm_rule, :app_id, :prepend_text => "")
     .control-group
-      = f.label :aggregate_cod_acc_no, "*Aggregator Pool Account", :class => 'control-label'
+      = f.label :aggregate_cod_acct_no, "*Aggregator Pool Account", :class => 'control-label'
       = f.text_field :aggregate_cod_acct_no, :maxlength => 16
       #msg-error
-        = error_message_for(@bm_rule, :cod_acct_no, :prepend_text => "")
+        = error_message_for(@bm_rule, :aggregate_cod_acct_no, :prepend_text => "")
     .control-group
       = f.label :customer_id, "*Customer ID", :class => 'control-label'
       = f.text_field :customer_id, :maxlength => 15
       #msg-error
         = error_message_for(@bm_rule, :customer_id, :prepend_text => "")
     .control-group
-      = f.label :bene_acct_no, "*Beneficiary Account No", :class => 'control-label'
+      = f.label :bene_account_no, "*Beneficiary Account No", :class => 'control-label'
       = f.text_field :bene_account_no, :maxlength => 16
       #msg-error
-        = error_message_for(@bm_rule, :bene_acct_no, :prepend_text => "")
+        = error_message_for(@bm_rule, :bene_account_no, :prepend_text => "")
     .control-group
       = f.label :bene_account_ifsc, "*Beneficiary Account IFSC", :class => 'control-label'
       = f.text_field :bene_account_ifsc, :maxlength => 11
@@ -61,14 +61,14 @@
       = f.label :receivables_account, "Receivable Account", :class => 'control-label'
       = f.text_field :receivables_account,:maxlength => 20
       #msg-error
-        = error_message_for(@bm_rule, :receivable_account, :prepend_text => "")
+        = error_message_for(@bm_rule, :receivables_account, :prepend_text => "")
     .control-group
       = f.label :isbbps, "Is BBPS", :class => 'control-label'
       = f.check_box :isbbps, {},"Y","N"
       #msg-error
-        = error_message_for(@bm_rule, :payment_mode, :prepend_text => "")    
+        = error_message_for(@bm_rule, :isbbps, :prepend_text => "")    
   .form-actions
-    - (f.object.new_record? and f.object.aggregate_cod_acc_no.nil?) ? label_name = "Create" : label_name = "Update"
+    - (f.object.new_record? and f.object.aggregate_cod_acct_no.nil?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_rule', :value => label_name + ' Bm Rules'
     = link_to :Cancel,'/obdx_bm_rules', :name => 'cancel', :class=>"cancel btn"
 

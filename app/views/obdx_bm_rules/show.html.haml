@@ -30,7 +30,7 @@
             %td.value
               = @bm_rule.aggregate_cod_acct_no
             %td#msg-error
-              = error_message_for(@bm_rule, :cod_acct_no, :prepend_text => "")
+              = error_message_for(@bm_rule, :aggregate_cod_acct_no, :prepend_text => "")
           %tr
             %td.label Customer ID
             %td.value
@@ -42,7 +42,7 @@
             %td.value
               = @bm_rule.bene_account_no
             %td#msg-error
-              = error_message_for(@bm_rule, :bene_acct_no, :prepend_text => "")
+              = error_message_for(@bm_rule, :bene_account_no, :prepend_text => "")
           %tr
             %td.label Beneficiary Account IFSC
             %td.value
@@ -84,7 +84,7 @@
             %td.value
               = @bm_rule.receivables_account
             %td#msg-error
-              = error_message_for(@bm_rule, :receivable_account, :prepend_text => "")    
+              = error_message_for(@bm_rule, :receivables_account, :prepend_text => "")    
           %tr
             %td.label Updated By
             %td.value
