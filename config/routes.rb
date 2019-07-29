@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :obdx_bm_bill_payments
   resources :obdx_bm_aggregator_payments
   resources :obdx_bm_apps
+  resources :obdx_reports
   resources :obdx_bm_bill_payments_summaries, only: [:index]
   
   get '/obdx_bm_biller/:id/audit_logs' => 'obdx_bm_billers#audit_logs'
