@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   put '/obdx_bm_aggregator_payment/:id/approve' => "obdx_bm_aggregator_payments#approve"
   put '/obdx_bm_app/:id/approve' => "obdx_bm_apps#approve"
   get '/obdx_bm_bill_payments/:id/audit_logs/:step_name' => 'obdx_bm_bill_payments#audit_logs'
-  
   #get '/bm_aggregator_payment/hit_api/:id' => 'bm_aggregator_payments#hit_api', as: :hit_api
+
+  get "payment_schedules/index"
+  get "payment_schedules/auto"
+  get "payment_schedules/schedule"
+
 end

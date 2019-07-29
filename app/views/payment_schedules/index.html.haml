@@ -1,0 +1,16 @@
+%br
+%br
+%br
+.header-form-main{:style=>'width: 15%; height: 500px; display: inline-block;'}
+  = image_tag 'delete_payment.png', :size => "150x150"
+.header-form-main{:style=>'width: 50%;'}
+  %table.table.no-border{:style=>"table-layout: fixed; width: 100%; font-size: 700px;"}
+    %br
+    %span.h1{:style => "font-size:20px;"} Payment Schedule
+    %br
+    %br
+    - ["schedule","auto"].each do |i|
+      %tr
+        %td
+          - action_path = "payment_schedules_#{i}_path"
+          = link_to "Delete "+i + " Payment",{:action=>"#{i}"},{:style => "font-size:15px;"}

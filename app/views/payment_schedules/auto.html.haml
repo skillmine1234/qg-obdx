@@ -1,0 +1,24 @@
+%br
+%h1 Delete Schedule Payment
+%br
+= form_tag('autoe?form=true',:method=>"get",remote: true,:class=>'form-horizontal') do
+  .control-group
+    = label_tag 'Customer ID'
+    = text_field_tag "customer_id"
+  .control-group
+    = label_tag 'Mobile Number'
+    = text_field_tag "mobile_no"
+  .control-group
+    = label_tag 'AutoPay Status'
+    = text_field_tag "autopay_status"
+  .control-group
+    = label_tag 'Channel'
+    = text_field_tag "channel"
+  .control-group
+    = label_tag 'System IP'
+    = text_field_tag "system_ip"
+  .control-group
+    = label_tag 'System MAC'
+    = text_field_tag "system_mac"        
+  .form-actions
+    = submit_tag "Delete Auto Payment",:class=>"btn btn-primary"

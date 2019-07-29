@@ -8,5 +8,6 @@ module Qg
     MODELS = ['ObdxBmRule','ObdxBmBiller','ObdxBmBillPayment','ObdxBmApp','ObdxBmUnapprovedRecord','ObdxBmBillPaymentsSummary']
     TEST_MENU_ITEMS = []
     COMMON_MENU_ITEMS = [:reports]
+    OBDX_OPERATIONS = ["present"]
   end
 end

@@ -12,11 +12,13 @@ class ObdxBmRulesController < ApplicationController
   def create
     @bm_rule = ObdxBmRule.new(params[:obdx_bm_rule])
     if !@bm_rule.valid?
+      binding.pry
       render "new"
     else
       @bm_rule.created_by = current_user.id
       @bm_rule.save
       flash[:alert] = 'Rule successfully created and is pending for approval'
+      binding.pry
       redirect_to @bm_rule
     end
   end

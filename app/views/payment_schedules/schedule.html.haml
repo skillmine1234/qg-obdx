@@ -1,0 +1,12 @@
+%br
+%h1 Delete Schedule Payment
+%br
+= form_tag('schedule?form=true',:method=>"get",remote: true,:class=>'form-horizontal') do
+  .control-group
+    = label_tag 'Customer ID'
+    = text_field_tag "customer_id"
+  .control-group
+    = label_tag 'Payment ID'
+    = text_field_tag "payment_id"
+  .form-actions
+    = submit_tag "Delete Payment",:class=>"btn btn-primary"

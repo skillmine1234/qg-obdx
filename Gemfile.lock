@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    qg-obdx (0.1.0)
+    qg-obdx (1.0.7)
       rails (= 4.2.2)
 
 GEM
