@@ -13,7 +13,7 @@ class ObdxBmBillPayment < ActiveRecord::Base
     bill_payments = bill_payments.where("bm_bill_payments.req_no LIKE ?","#{params[:req_no]}%") if params[:req_no].present?
     bill_payments = bill_payments.where("bm_bill_payments.customer_id=?",params[:customer_id]) if params[:customer_id].present?
     bill_payments = bill_payments.where("bm_bill_payments.debit_account_no=?",params[:debit_account_no]) if params[:debit_account_no].present?
-    bill_payments = bill_payments.where("bm_bill_payments.biller_id=?",params[:biller_id]) if params[:biller_id].present?
+    bill_payments = bill_payments.where("bm_billf_payments.biller_id=?",params[:biller_id]) if params[:biller_id].present?
     bill_payments = bill_payments.where("bm_bill_payments.biller_acct_id=?",params[:biller_acct_id]) if params[:biller_acct_id].present?
     bill_payments = bill_payments.where("bm_bill_payments.status=?",params[:status]) if params[:status].present?
     bill_payments = bill_payments.where("bm_bill_payments.billpay_req_ref=?",params[:billpay_req_ref]) if params[:billpay_req_ref].present?
@@ -56,4 +56,38 @@ class ObdxBmBillPayment < ActiveRecord::Base
      ' Cod Pool Account No', 'Bill Date', 'Due Date', 'Bill Number', 'Billpay Bank Ref']
   end
   
+  def self.payment_mode_records(payment_mode,start_date=nil,end_date=nil)
+    if start_date.present? && end_date.present?
+      start_date = Date.parse(start_date).strftime("%d-%m-%y")
+      end_date = Date.parse(end_date).strftime("%d-%m-%y")
+      where("payment_method = ? and payment_status = 'SUCCESS' and req_timestamp BETWEEN #{start_date} and #{end_date}", payment_mode)
+    else
+      all
+    end
+  end
+
+  def self.fetch_for_wallet_format(start_date, end_date)
+    start_date = Date.parse(start_date).strftime("%d-%m-%y")
+    end_date = Date.parse(end_date).strftime("%d-%m-%y")
+    if start_date.present? && end_date.present?
+      where("payment_method = ? and req_timestamp BETWEEN #{start_date} and #{end_date}", 'Wallet')
+    else
+      where("payment_method = ?", 'Wallet')
+    end
+  end
+
+  def self.fetch_for_cc_format(start_date, end_date)
+    start_date = Date.parse(start_date).strftime("%d-%m-%y")
+      end_date = Date.parse(end_date).strftime("%d-%m-%y")
+    if start_date.present? && end_date.present?
+      where("payment_method = ? and req_timestamp BETWEEN #{start_date} and #{end_date}", 'CreditCard')
+    else
+      where("payment_method = ?", 'CreditCard')
+    end
+  end
+
+  def success_bm_billpay_steps
+    where(step_name: 'WALLET_DEBITED', status_code: 'COMPLETED').last
+  end
+
 end

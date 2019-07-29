@@ -1,0 +1,60 @@
+:javascript
+  $(document).ajaxSend(function(r, s) {
+    $("#spinner_area").show();
+  });
+
+  $(document).ajaxStop(function(r, s) {
+    $("#spinner_area").hide();
+  });
+
+  $(document).ready(function(){
+
+    $("#generate_report_btn").on('click', function(e){
+      $("#msg-error").text("")
+      e.preventDefault
+      var from_date = $("#from_date").val();
+      var to_date = $("#to_date").val();
+      var report_type = $("#report_type").val();
+      
+      if (from_date == "" || from_date == undefined || to_date == "" || to_date == undefined || report_type == "" || report_type == undefined){
+        $("#msg-error").text("Please select report type and date range")
+        return false
+      }
+      else if(from_date != "" && to_date != ""){
+        var start_date = new Date(from_date)
+        var end_date = new Date(to_date)
+        debugger  
+        if (start_date > end_date){
+          $("#msg-error").text("To Date should be Greater than From Date");
+          return false;
+        }
+      }
+      
+
+
+
+    });
+  })
+
+
+#spinner_area{:style=>"float-left:100px;margin-left:550px;height:100px;width:100px;margin-top:10px;;display:none;"}
+  = image_tag "spinner_gif.gif",size: "80x80"
+  please wiat....
+%br
+%h1 OBDX Reports
+%br
+= form_tag(new_obdx_report_path, :method=>"get",:class=>'form-horizontal') do
+  .control-group
+    = label_tag 'Report Type'
+    = select_tag :report_type, options_for_select([['Bill Desk', 'bill_desk'], ['wallet bussiness','wallet_bussiness'], ['Credit Card Bussiness', 'credit_card_bussiness']]), :prompt => 'Select Report'
+  .control-group
+    = label_tag 'From Date'
+    = text_field_tag "from_date"
+  .control-group
+    = label_tag 'To date'
+    = text_field_tag "to_date"
+  .form-actions
+    = submit_tag "GENERATE REPORT",:class=>"btn btn-primary", :id => "generate_report_btn", data:{disable_with: "Please wait..."}
+    %br
+    %br
+    #msg-error
