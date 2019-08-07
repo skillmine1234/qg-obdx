@@ -1,0 +1,18 @@
+#download_csv_btn
+  =link_to 'Download CSV',{:action=>"csv_reports",:report_type=>@report_type,:start_date=>@start_date,:end_date=>@end_date} if @records.present?
+%br
+  %h3 
+    #{@report_type.titleize} Report :
+
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    - @table_header.each do |row_header|
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+        #{row_header}
+
+  .tbody
+    - @records.each do |statement_data|
+      %tr
+        - @column_reader.each do |col_name|
+          %td{:style=>'text-align:left;'}
+            #{statement_data.send(col_name)}

@@ -1,5 +1,5 @@
 class ObdxBmBillPayment < ActiveRecord::Base  
-  establish_connection "obdx_#{Rails.env}"
+  #establish_connection "obdx_#{Rails.env}"
   self.table_name = "bm_bill_payments"
 
   has_many :obdx_bm_billpay_steps
@@ -60,7 +60,7 @@ class ObdxBmBillPayment < ActiveRecord::Base
     if start_date.present? && end_date.present?
       start_date = Date.parse(start_date).strftime("%d-%m-%y")
       end_date = Date.parse(end_date).strftime("%d-%m-%y")
-      where("payment_method = ? and payment_status = 'SUCCESS' and req_timestamp BETWEEN #{start_date} and #{end_date}", payment_mode)
+      where("payment_method = ? and payment_status = 'SUCCESS' and req_timestamp BETWEEN '#{start_date}' and '#{end_date}'", payment_mode)
     else
       all
     end
@@ -70,7 +70,7 @@ class ObdxBmBillPayment < ActiveRecord::Base
     start_date = Date.parse(start_date).strftime("%d-%m-%y")
     end_date = Date.parse(end_date).strftime("%d-%m-%y")
     if start_date.present? && end_date.present?
-      where("payment_method = ? and req_timestamp BETWEEN #{start_date} and #{end_date}", 'Wallet')
+      where("payment_method = ? and req_timestamp BETWEEN '#{start_date}' and '#{end_date}'", 'Wallet')
     else
       where("payment_method = ?", 'Wallet')
     end
@@ -80,7 +80,7 @@ class ObdxBmBillPayment < ActiveRecord::Base
     start_date = Date.parse(start_date).strftime("%d-%m-%y")
       end_date = Date.parse(end_date).strftime("%d-%m-%y")
     if start_date.present? && end_date.present?
-      where("payment_method = ? and req_timestamp BETWEEN #{start_date} and #{end_date}", 'CreditCard')
+      where("payment_method = ? and req_timestamp BETWEEN '#{start_date}' and '#{end_date}'", 'CreditCard')
     else
       where("payment_method = ?", 'CreditCard')
     end
@@ -89,5 +89,27 @@ class ObdxBmBillPayment < ActiveRecord::Base
   def success_bm_billpay_steps
     where(step_name: 'WALLET_DEBITED', status_code: 'COMPLETED').last
   end
+ 
+ def records_bill_pay_status
+    success_records = self.obdx_bm_billpay_steps.where(step_name: 'WALLET_DEBITED', status_code: 'COMPLETED').last
+    failure_records = self.obdx_bm_billpay_steps.where(step_name: 'WALLET_DEBIT', status_code: 'FAILED').last
+    return records_bill_pay_status = success_records.any? ? "SUCCESS" : failure_records.any? ? "FAILED" : ''
+ end
+
+def records_cc_status
+  approved_records = self.obdx_bm_billpay_steps.where(step_name: 'CREDIT_CARD_DEBITED', status_code: 'COMPLETED').last
+  declined_records = self.obdx_bm_billpay_steps.where(step_name: 'CREDITCARD_DEBIT', status_code: 'FAILED').last
+  records_cc_status = approved_records.any? ? "APPROVE" : declined_records.any? ? "DECLINE" : ''
+end
+
+def records_bill_pay_status
+  success_records = self.obdx_bm_billpay_steps.where(step_name: 'BILLPAY', status_code: 'COMPLETED').last
+  failure_records = self.obdx_bm_billpay_steps.where(step_name: 'BILLPAY', status_code: 'FAILED').last
+  return records_bill_pay_status = success_records.any? ? "SUCCESS" : failure_records.any? ? "FAILED" : ''
+end
+
+def card_start_end_no
+  return card_start_end_no = self.card_start + 'XXXXXX' + self.card_end
+end
 
 end

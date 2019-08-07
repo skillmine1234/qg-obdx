@@ -29,24 +29,21 @@
           return false;
         }
       }
-      
-
-
 
     });
   })
 
 
-#spinner_area{:style=>"float-left:100px;margin-left:550px;height:100px;width:100px;margin-top:10px;;display:none;"}
+#spinner_area{:style=>"float-left:100px;margin-left:550px;height:100px;width:100px;margin-top:10px;display:none;"}
   = image_tag "spinner_gif.gif",size: "80x80"
   please wiat....
 %br
 %h1 OBDX Reports
 %br
-= form_tag(new_obdx_report_path, :method=>"get",:class=>'form-horizontal') do
+= form_tag(html_report_obdx_reports_path, :method=>"get",:remote=>true ,:class=>'form-horizontal') do
   .control-group
     = label_tag 'Report Type'
-    = select_tag :report_type, options_for_select([['Bill Desk', 'bill_desk'], ['wallet bussiness','wallet_bussiness'], ['Credit Card Bussiness', 'credit_card_bussiness']]), :prompt => 'Select Report'
+    = select_tag :report_type, options_for_select([['Bill Desk-CreditCard', 'bill_desk_credit_card'],['Bill Desk-BankAccount', 'bill_desk_bank_account'],['Bill Desk-Wallet', 'bill_desk_wallet'], ['wallet bussiness','wallet_bussiness'], ['Credit Card Bussiness', 'credit_card_bussiness']]), :prompt => 'Select Report'
   .control-group
     = label_tag 'From Date'
     = text_field_tag "from_date"
@@ -58,3 +55,4 @@
     %br
     %br
     #msg-error
+#data_area{:style=>"dispaly:none;"}
